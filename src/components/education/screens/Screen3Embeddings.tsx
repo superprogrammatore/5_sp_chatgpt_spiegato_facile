@@ -111,36 +111,78 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
                 Spazio dei significati
               </div>
               
-              {/* Subtle grid */}
-              <svg className="absolute inset-0 w-full h-full opacity-30">
-                {/* Horizontal lines */}
-                {[20, 40, 60, 80].map((y) => (
-                  <line
-                    key={`h-${y}`}
-                    x1="0%"
-                    y1={`${y}%`}
-                    x2="100%"
-                    y2={`${y}%`}
-                    stroke="currentColor"
-                    strokeWidth="1"
-                    strokeDasharray="4 4"
-                    className="text-border"
-                  />
-                ))}
-                {/* Vertical lines */}
-                {[20, 40, 60, 80].map((x) => (
-                  <line
-                    key={`v-${x}`}
-                    x1={`${x}%`}
-                    y1="0%"
-                    x2={`${x}%`}
-                    y2="100%"
-                    stroke="currentColor"
-                    strokeWidth="1"
-                    strokeDasharray="4 4"
-                    className="text-border"
-                  />
-                ))}
+              {/* SVG for grid and connection lines */}
+              <svg className="absolute inset-0 w-full h-full">
+                {/* Subtle grid */}
+                <g className="opacity-30">
+                  {/* Horizontal lines */}
+                  {[20, 40, 60, 80].map((y) => (
+                    <line
+                      key={`h-${y}`}
+                      x1="0%"
+                      y1={`${y}%`}
+                      x2="100%"
+                      y2={`${y}%`}
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      strokeDasharray="4 4"
+                      className="text-border"
+                    />
+                  ))}
+                  {/* Vertical lines */}
+                  {[20, 40, 60, 80].map((x) => (
+                    <line
+                      key={`v-${x}`}
+                      x1={`${x}%`}
+                      y1="0%"
+                      x2={`${x}%`}
+                      y2="100%"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      strokeDasharray="4 4"
+                      className="text-border"
+                    />
+                  ))}
+                </g>
+                
+                {/* Animated connection lines between tokens */}
+                {step >= 2 && tokens.length > 1 && tokens.map((_, i) => {
+                  // Connect each token to the next one
+                  if (i >= tokens.length - 1) return null;
+                  const pos1 = getTokenPosition(i, tokens.length);
+                  const pos2 = getTokenPosition(i + 1, tokens.length);
+                  
+                  return (
+                    <motion.line
+                      key={`connection-${i}`}
+                      x1={`${pos1.x}%`}
+                      y1={`${pos1.y}%`}
+                      x2={`${pos2.x}%`}
+                      y2={`${pos2.y}%`}
+                      stroke="url(#connectionGradient)"
+                      strokeWidth="2"
+                      strokeDasharray="6 4"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ 
+                        pathLength: 1, 
+                        opacity: [0, 0.6, 0.3, 0.6],
+                      }}
+                      transition={{ 
+                        pathLength: { delay: i * 0.3 + 0.5, duration: 0.8 },
+                        opacity: { delay: i * 0.3 + 1.3, duration: 2, repeat: Infinity }
+                      }}
+                    />
+                  );
+                })}
+                
+                {/* Gradient definition for glowing lines */}
+                <defs>
+                  <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="hsl(var(--primary))" />
+                    <stop offset="50%" stopColor="hsl(var(--accent))" />
+                    <stop offset="100%" stopColor="hsl(var(--secondary))" />
+                  </linearGradient>
+                </defs>
               </svg>
 
               {/* Animated dots for user tokens */}
