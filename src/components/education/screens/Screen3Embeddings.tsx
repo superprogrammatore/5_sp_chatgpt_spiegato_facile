@@ -227,7 +227,7 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
       {step >= 3 && (
         <ExplanationBox title="Cosa sono gli embeddings?" delay={0.5}>
           <p className="text-muted-foreground">
-            <strong className="text-foreground">Gli embeddings sono come una mappa del significato.</strong> 
+            <strong className="text-foreground">Gli embeddings sono come una mappa del significato.</strong>{" "}
             Ogni parola diventa un punto in uno "spazio" immaginario.
           </p>
           <p className="text-muted-foreground">

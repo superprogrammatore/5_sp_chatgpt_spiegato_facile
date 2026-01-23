@@ -302,7 +302,7 @@ export const Screen4Attention = ({ userInput }: Screen4AttentionProps) => {
       {step >= 3 && (
         <ExplanationBox title="Come funziona l'attenzione?" delay={3}>
           <p className="text-muted-foreground">
-            <strong className="text-foreground">L'attenzione è il "superpotere" di ChatGPT.</strong> 
+            <strong className="text-foreground">L'attenzione è il "superpotere" di ChatGPT.</strong>{" "}
             Invece di leggere le parole una alla volta, le guarda tutte insieme.
           </p>
           <p className="text-muted-foreground">

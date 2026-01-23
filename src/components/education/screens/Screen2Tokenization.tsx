@@ -130,7 +130,7 @@ export const Screen2Tokenization = ({ userInput }: Screen2TokenizationProps) => 
       {showNumbers && (
         <ExplanationBox title="Cos'è la tokenizzazione?" delay={0.5}>
           <p className="text-muted-foreground">
-            <strong className="text-foreground">I computer non capiscono le parole</strong> come noi. 
+            <strong className="text-foreground">I computer non capiscono le parole</strong> come noi.{" "}
             Possono lavorare solo con numeri!
           </p>
           <p className="text-muted-foreground">

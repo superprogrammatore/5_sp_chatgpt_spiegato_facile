@@ -231,7 +231,7 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
       {/* Explanation Box */}
       <ExplanationBox title="Come sceglie la parola?" delay={0.5}>
         <p className="text-muted-foreground">
-          <strong className="text-foreground">ChatGPT non "pensa" come un umano.</strong> 
+          <strong className="text-foreground">ChatGPT non "pensa" come un umano.</strong>{" "}
           Calcola una probabilità per ogni possibile parola successiva.
         </p>
         <p className="text-muted-foreground">
