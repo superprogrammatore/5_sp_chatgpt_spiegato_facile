@@ -52,22 +52,6 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
     };
   }, []);
 
-  // Generate well-distributed positions for dots in a grid-like pattern
-  const getTokenPosition = (index: number, total: number) => {
-    const cols = Math.ceil(Math.sqrt(total));
-    const row = Math.floor(index / cols);
-    const col = index % cols;
-    
-    // Add some randomness but keep them well distributed
-    const baseX = 15 + (col / cols) * 70;
-    const baseY = 20 + (row / Math.ceil(total / cols)) * 60;
-    
-    return {
-      x: baseX + (Math.random() - 0.5) * 10,
-      y: baseY + (Math.random() - 0.5) * 10,
-    };
-  };
-
   return (
     <div className="flex flex-col items-center text-center">
       {/* Header */}
@@ -93,7 +77,7 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
 
       {/* Visualization area */}
       <div className="w-full max-w-2xl">
-        {/* Step 1: Numbers transforming to vectors */}
+        {/* Step 1: Show user words as list transforming to colored dots */}
         {step >= 1 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -101,158 +85,66 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
             className="edu-card mb-8"
           >
             <p className="text-sm text-muted-foreground mb-4">
-              🎯 Ogni parola diventa un punto colorato nello "spazio dei significati":
+              🎯 Le tue parole diventano punti colorati:
             </p>
             
-            {/* Vector space visualization - improved */}
-            <div className="relative w-full h-72 md:h-80 bg-gradient-to-br from-muted/50 to-muted/30 rounded-xl border-2 border-border overflow-hidden">
-              {/* Axis labels */}
-              <div className="absolute top-2 left-2 text-xs text-muted-foreground font-medium">
-                Spazio dei significati
-              </div>
-              
-              {/* SVG for grid and connection lines */}
-              <svg className="absolute inset-0 w-full h-full">
-                {/* Subtle grid */}
-                <g className="opacity-30">
-                  {/* Horizontal lines */}
-                  {[20, 40, 60, 80].map((y) => (
-                    <line
-                      key={`h-${y}`}
-                      x1="0%"
-                      y1={`${y}%`}
-                      x2="100%"
-                      y2={`${y}%`}
-                      stroke="currentColor"
-                      strokeWidth="1"
-                      strokeDasharray="4 4"
-                      className="text-border"
-                    />
-                  ))}
-                  {/* Vertical lines */}
-                  {[20, 40, 60, 80].map((x) => (
-                    <line
-                      key={`v-${x}`}
-                      x1={`${x}%`}
-                      y1="0%"
-                      x2={`${x}%`}
-                      y2="100%"
-                      stroke="currentColor"
-                      strokeWidth="1"
-                      strokeDasharray="4 4"
-                      className="text-border"
-                    />
-                  ))}
-                </g>
-                
-                {/* Animated connection lines between tokens */}
-                {step >= 2 && tokens.length > 1 && tokens.map((_, i) => {
-                  // Connect each token to the next one
-                  if (i >= tokens.length - 1) return null;
-                  const pos1 = getTokenPosition(i, tokens.length);
-                  const pos2 = getTokenPosition(i + 1, tokens.length);
-                  
-                  return (
-                    <motion.line
-                      key={`connection-${i}`}
-                      x1={`${pos1.x}%`}
-                      y1={`${pos1.y}%`}
-                      x2={`${pos2.x}%`}
-                      y2={`${pos2.y}%`}
-                      stroke="url(#connectionGradient)"
-                      strokeWidth="2"
-                      strokeDasharray="6 4"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ 
-                        pathLength: 1, 
-                        opacity: [0, 0.6, 0.3, 0.6],
-                      }}
-                      transition={{ 
-                        pathLength: { delay: i * 0.3 + 0.5, duration: 0.8 },
-                        opacity: { delay: i * 0.3 + 1.3, duration: 2, repeat: Infinity }
-                      }}
-                    />
-                  );
-                })}
-                
-                {/* Gradient definition for glowing lines */}
-                <defs>
-                  <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="hsl(var(--primary))" />
-                    <stop offset="50%" stopColor="hsl(var(--accent))" />
-                    <stop offset="100%" stopColor="hsl(var(--secondary))" />
-                  </linearGradient>
-                </defs>
-              </svg>
-
-              {/* Animated dots for user tokens */}
-              {step >= 2 && tokens.map((token, index) => {
-                const pos = getTokenPosition(index, tokens.length);
+            {/* Words to dots transformation */}
+            <div className="flex flex-wrap justify-center gap-3 mb-6">
+              {tokens.map((token, index) => {
                 const colorClass = tokenColors[index % tokenColors.length];
-                
                 return (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.2, duration: 0.5, type: "spring" }}
-                    className="absolute"
-                    style={{ 
-                      left: `${pos.x}%`, 
-                      top: `${pos.y}%`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.15 }}
+                    className="flex items-center gap-2"
                   >
-                    <div className="relative group cursor-pointer">
-                      {/* Glow effect */}
+                    {/* The word */}
+                    <span className="text-foreground font-medium">{token}</span>
+                    
+                    {/* Arrow */}
+                    <motion.span
+                      initial={{ opacity: 0, x: -5 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.15 + 0.3 }}
+                      className="text-muted-foreground"
+                    >
+                      →
+                    </motion.span>
+                    
+                    {/* Colored dot */}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: index * 0.15 + 0.5, type: "spring" }}
+                      className={`w-8 h-8 rounded-full ${colorClass} shadow-md flex items-center justify-center`}
+                    >
                       <motion.div
-                        className={`absolute inset-0 ${colorClass} rounded-full blur-md opacity-50`}
-                        animate={{ scale: [1, 1.3, 1] }}
-                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                        className={`absolute w-8 h-8 rounded-full ${colorClass} opacity-40`}
+                        animate={{ scale: [1, 1.4, 1] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
                       />
-                      {/* Main dot */}
-                      <motion.div 
-                        className={`relative min-w-14 h-10 md:min-w-16 md:h-12 px-3 rounded-full ${colorClass} shadow-lg flex items-center justify-center`}
-                        whileHover={{ scale: 1.2 }}
-                      >
-                        <span className="text-xs md:text-sm font-bold text-primary-foreground">
-                          {token}
-                        </span>
-                      </motion.div>
-                      {/* Label on hover */}
-                      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-foreground text-background text-xs px-2 py-1 rounded-lg whitespace-nowrap z-10">
-                        {token}
-                      </div>
-                    </div>
+                    </motion.div>
                   </motion.div>
                 );
               })}
-              
-              {/* Legend */}
-              {step >= 2 && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: tokens.length * 0.2 + 0.5 }}
-                  className="absolute bottom-2 right-2 bg-background/80 backdrop-blur-sm rounded-lg p-2"
-                >
-                  <p className="text-xs text-muted-foreground">Le tue parole:</p>
-                  <div className="flex flex-wrap gap-1 mt-1 max-w-[150px]">
-                    {tokens.map((token, i) => (
-                      <span 
-                        key={i} 
-                        className={`inline-block w-3 h-3 rounded-full ${tokenColors[i % tokenColors.length]}`}
-                        title={token}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              )}
             </div>
+
+            {/* Simple explanation */}
+            {step >= 2 && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-sm text-muted-foreground bg-muted/50 rounded-lg p-3"
+              >
+                ✨ Ogni parola ha ora un <strong>colore unico</strong> che rappresenta il suo significato
+              </motion.p>
+            )}
           </motion.div>
         )}
 
-        {/* Step 2: Similar words cluster - improved visualization */}
+        {/* Step 2: Visual example of semantic proximity */}
         {step >= 3 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -260,42 +152,49 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
             className="edu-card"
           >
             <p className="text-sm text-muted-foreground mb-6">
-              🧲 <strong>Ecco la magia:</strong> parole con significato simile stanno vicine!
+              🧲 <strong>Ecco la magia:</strong> parole con significato simile hanno colori simili e stanno vicine!
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Visual clusters with bubbles */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {wordGroups.map((group, groupIndex) => (
                 <motion.div
                   key={groupIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: groupIndex * 0.2 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: groupIndex * 0.3, type: "spring" }}
                   className="relative"
                 >
-                  {/* Cluster background */}
-                  <div className={`absolute inset-0 ${group.color} opacity-10 rounded-2xl blur-xl`} />
+                  {/* Bubble background - visual cluster */}
+                  <motion.div 
+                    className={`absolute inset-0 ${group.color} opacity-15 rounded-3xl`}
+                    animate={{ scale: [1, 1.02, 1] }}
+                    transition={{ duration: 3, repeat: Infinity, delay: groupIndex * 0.5 }}
+                  />
                   
-                  <div className={`relative p-4 rounded-2xl border-2 border-dashed ${group.color.replace('bg-', 'border-')}/40 bg-background`}>
-                    {/* Cluster label */}
-                    <p className="text-xs font-medium text-muted-foreground mb-3 text-center">
-                      {group.label}
-                    </p>
+                  <div className="relative p-5 rounded-3xl border-2 border-border bg-background/80 backdrop-blur-sm">
+                    {/* Cluster emoji + label */}
+                    <div className="flex items-center justify-center gap-2 mb-4">
+                      <span className="text-xl">
+                        {groupIndex === 0 ? "😊" : groupIndex === 1 ? "📏" : "🐾"}
+                      </span>
+                      <p className="text-sm font-semibold text-foreground">
+                        {group.label}
+                      </p>
+                    </div>
                     
-                    {/* Words as dots with labels */}
+                    {/* Words as pills inside the bubble */}
                     <div className="flex flex-wrap gap-2 justify-center">
                       {group.words.map((word, wordIndex) => (
-                        <motion.div
+                        <motion.span
                           key={wordIndex}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: groupIndex * 0.2 + wordIndex * 0.1 }}
-                          className="flex items-center gap-1.5"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: groupIndex * 0.3 + wordIndex * 0.1 }}
+                          className={`px-3 py-1.5 rounded-full text-sm font-medium ${group.color} ${group.textColor} shadow-sm`}
                         >
-                          <span className={`w-3 h-3 rounded-full ${group.color} shadow-sm`} />
-                          <span className="text-sm text-foreground">
-                            {word}
-                          </span>
-                        </motion.div>
+                          {word}
+                        </motion.span>
                       ))}
                     </div>
                   </div>
@@ -303,20 +202,21 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
               ))}
             </div>
             
-            {/* Visual connection explanation */}
+            {/* Simple visual explanation */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              className="mt-6 flex items-center justify-center gap-4 text-sm text-muted-foreground"
+              transition={{ delay: 1.2 }}
+              className="mt-8 p-4 rounded-xl bg-muted/50 border border-border"
             >
-              <span className="flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-highlight" />
-                vicino a
-                <span className="w-4 h-4 rounded-full bg-highlight" />
-              </span>
-              <span>=</span>
-              <span className="font-medium text-foreground">significato simile!</span>
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium">cane</span>
+                  <span className="text-muted-foreground">e</span>
+                  <span className="px-2 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium">gatto</span>
+                </div>
+                <span className="text-muted-foreground font-medium">→ stessa bolla = significato simile!</span>
+              </div>
             </motion.div>
           </motion.div>
         )}
