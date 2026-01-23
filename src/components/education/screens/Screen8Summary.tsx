@@ -260,39 +260,58 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
               <span className="text-2xl">🎓</span> Riassunto finale
             </h3>
             
-            <div className="space-y-4 text-left">
-              <div className="p-4 bg-muted/50 rounded-xl">
-                <p className="text-muted-foreground">
-                  <strong className="text-foreground">1.</strong>{" "}
-                  Tu scrivi una frase → viene convertita in <strong className="text-primary">numeri (token)</strong>
+            <div className="space-y-3 text-left">
+              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-primary">
+                <p className="font-semibold text-foreground mb-1">
+                  1. Input e Tokenizzazione
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Tu scrivi una frase. Il modello la spezza in pezzi chiamati <strong className="text-primary">token</strong> — possono essere parole intere o parti di parole. Ogni token viene poi convertito in un numero unico che il computer può elaborare.
                 </p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-xl">
-                <p className="text-muted-foreground">
-                  <strong className="text-foreground">2.</strong>{" "}
-                  I numeri diventano <strong className="text-accent">vettori di significato (embeddings)</strong>
+              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-accent">
+                <p className="font-semibold text-foreground mb-1">
+                  2. Embeddings (Vettori di significato)
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Ogni numero diventa una lista di valori chiamata <strong className="text-accent">vettore</strong>. Questo vettore cattura il "significato" della parola: parole simili avranno vettori simili. È come dare a ogni parola delle coordinate in uno spazio matematico.
                 </p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-xl">
-                <p className="text-muted-foreground">
-                  <strong className="text-foreground">3.</strong>{" "}
-                  L'<strong className="text-highlight">attenzione</strong> analizza le relazioni tra le parole
+              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-highlight">
+                <p className="font-semibold text-foreground mb-1">
+                  3. Meccanismo di Attenzione
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Il modello analizza tutte le parole insieme e decide quali sono più <strong className="text-highlight">importanti</strong> per capire il contesto. Ad esempio, in "Il gatto mangia il pesce", l'attenzione collega "mangia" a "gatto" (chi fa l'azione) e a "pesce" (cosa viene mangiato).
                 </p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-xl">
-                <p className="text-muted-foreground">
-                  <strong className="text-foreground">4.</strong>{" "}
-                  ChatGPT <strong className="text-tertiary">predice</strong> la parola più probabile
+              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-tertiary">
+                <p className="font-semibold text-foreground mb-1">
+                  4. Predizione della parola successiva
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Dopo aver "compreso" il contesto, ChatGPT calcola le probabilità di tutte le possibili parole successive e sceglie quella più <strong className="text-tertiary">probabile</strong>. È come completare una frase: "Il sole tramonta sul..." → probabilmente "mare" o "orizzonte".
                 </p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-xl">
-                <p className="text-muted-foreground">
-                  <strong className="text-foreground">5.</strong>{" "}
-                  Ripete il processo per ogni parola → <strong className="text-secondary">nasce la risposta!</strong>
+              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-secondary">
+                <p className="font-semibold text-foreground mb-1">
+                  5. Loop autoregressivo
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  La parola scelta viene aggiunta alla frase, e tutto il processo <strong className="text-secondary">ricomincia</strong>. Il modello genera una parola alla volta, considerando ogni volta tutto ciò che ha già scritto. Così nasce la risposta completa!
+                </p>
+              </div>
+
+              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-primary">
+                <p className="font-semibold text-foreground mb-1">
+                  6. Il segreto: l'allenamento
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Tutto questo funziona perché ChatGPT è stato <strong className="text-primary">allenato</strong> leggendo miliardi di testi. Ha imparato i pattern del linguaggio, le regole grammaticali, i fatti sul mondo — tutto attraverso l'esposizione massiva a testi scritti da umani.
                 </p>
               </div>
             </div>
