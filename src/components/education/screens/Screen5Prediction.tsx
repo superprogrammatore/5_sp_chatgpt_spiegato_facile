@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Target, Check } from "lucide-react";
 import { useState, useEffect } from "react";
+import { ExplanationBox } from "../ExplanationBox";
 
 interface Screen5PredictionProps {
   userInput: string;
@@ -227,22 +228,27 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
         </motion.div>
       </div>
 
-      {/* Explanation */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="mt-8 p-6 rounded-2xl bg-secondary/10 border border-secondary/30 max-w-lg"
-      >
-        <p className="text-foreground">
-          💡 <strong>È come un gioco di probabilità!</strong>
-          <br />
-          <span className="text-muted-foreground">
-            ChatGPT non "pensa" - calcola quale parola è più probabile 
-            in base a tutto ciò che ha letto durante l'allenamento.
-          </span>
+      {/* Explanation Box */}
+      <ExplanationBox title="Come sceglie la parola?" delay={0.5}>
+        <p className="text-muted-foreground">
+          <strong className="text-foreground">ChatGPT non "pensa" come un umano.</strong> 
+          Calcola una probabilità per ogni possibile parola successiva.
         </p>
-      </motion.div>
+        <p className="text-muted-foreground">
+          Dopo aver analizzato il contesto con l'attenzione, assegna un 
+          <strong className="text-foreground"> punteggio</strong> a migliaia di parole. 
+          Poi sceglie quella con il punteggio più alto (o a volte una a caso tra le migliori, per essere più creativo!).
+        </p>
+        <p className="text-muted-foreground">
+          È come un gioco di probabilità molto sofisticato: "Cosa viene dopo in base a tutto quello che ho letto?"
+        </p>
+        <div className="mt-3 p-3 bg-muted/50 rounded-lg">
+          <p className="text-sm text-muted-foreground">
+            <strong className="text-foreground">Curiosità:</strong> ChatGPT considera circa 100.000 possibili parole 
+            ogni volta che deve scegliere la prossima!
+          </p>
+        </div>
+      </ExplanationBox>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Scissors } from "lucide-react";
 import { useState, useEffect } from "react";
+import { ExplanationBox } from "../ExplanationBox";
 
 interface Screen2TokenizationProps {
   userInput: string;
@@ -125,23 +126,28 @@ export const Screen2Tokenization = ({ userInput }: Screen2TokenizationProps) => 
         )}
       </div>
 
-      {/* Explanation */}
+      {/* Explanation Box */}
       {showNumbers && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-10 p-6 rounded-2xl bg-primary/5 border border-primary/20 max-w-lg"
-        >
-          <p className="text-foreground">
-            💡 <strong>Perché numeri?</strong>
-            <br />
-            <span className="text-muted-foreground">
-              I computer sono bravissimi con i numeri! Questa trasformazione permette 
-              a ChatGPT di "lavorare" con le parole.
-            </span>
+        <ExplanationBox title="Cos'è la tokenizzazione?" delay={0.5}>
+          <p className="text-muted-foreground">
+            <strong className="text-foreground">I computer non capiscono le parole</strong> come noi. 
+            Possono lavorare solo con numeri!
           </p>
-        </motion.div>
+          <p className="text-muted-foreground">
+            La <strong className="text-foreground">tokenizzazione</strong> è il primo passo: 
+            la frase viene divisa in pezzi più piccoli chiamati "token". 
+            Ogni token riceve un numero unico, come un codice identificativo.
+          </p>
+          <p className="text-muted-foreground">
+            È come tradurre da italiano a... "numerese"! 📊
+          </p>
+          <div className="mt-3 p-3 bg-muted/50 rounded-lg">
+            <p className="text-sm text-muted-foreground">
+              <strong className="text-foreground">Curiosità:</strong> ChatGPT usa circa 100.000 token diversi. 
+              Parole comuni hanno un solo token, parole rare ne hanno più di uno!
+            </p>
+          </div>
+        </ExplanationBox>
       )}
     </div>
   );

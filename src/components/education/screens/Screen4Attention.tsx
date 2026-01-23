@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, Lightbulb, HelpCircle } from "lucide-react";
 import { useState, useEffect } from "react";
+import { ExplanationBox } from "../ExplanationBox";
 
 interface Screen4AttentionProps {
   userInput: string;
@@ -297,24 +298,28 @@ export const Screen4Attention = ({ userInput }: Screen4AttentionProps) => {
         )}
       </div>
 
-      {/* Final insight */}
+      {/* Explanation Box */}
       {step >= 3 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 3 }}
-          className="mt-8 p-6 rounded-2xl bg-highlight/10 border border-highlight/30 max-w-lg"
-        >
-          <p className="text-foreground">
-            🧠 <strong>In sintesi</strong>
-            <br />
-            <span className="text-muted-foreground">
-              L'attenzione è il "superpotere" di ChatGPT: 
-              gli permette di capire il contesto guardando tutte le parole insieme, 
-              non una alla volta!
-            </span>
+        <ExplanationBox title="Come funziona l'attenzione?" delay={3}>
+          <p className="text-muted-foreground">
+            <strong className="text-foreground">L'attenzione è il "superpotere" di ChatGPT.</strong> 
+            Invece di leggere le parole una alla volta, le guarda tutte insieme.
           </p>
-        </motion.div>
+          <p className="text-muted-foreground">
+            Per ogni parola, ChatGPT decide: "Quali altre parole sono importanti per capire questa?". 
+            Poi dà più <strong className="text-foreground">"peso"</strong> alle parole rilevanti.
+          </p>
+          <p className="text-muted-foreground">
+            È così che ChatGPT può disambiguare parole come "banca" 
+            (soldi? o fiume?) guardando il contesto!
+          </p>
+          <div className="mt-3 p-3 bg-muted/50 rounded-lg">
+            <p className="text-sm text-muted-foreground">
+              <strong className="text-foreground">Curiosità:</strong> ChatGPT ha 96 "teste di attenzione" 
+              che guardano la frase in modi diversi contemporaneamente!
+            </p>
+          </div>
+        </ExplanationBox>
       )}
     </div>
   );

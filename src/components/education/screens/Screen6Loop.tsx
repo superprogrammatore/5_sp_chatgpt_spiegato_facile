@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { RefreshCw, Plus } from "lucide-react";
 import { useState, useEffect } from "react";
+import { ExplanationBox } from "../ExplanationBox";
 
 interface Screen6LoopProps {
   userInput: string;
@@ -184,22 +185,28 @@ export const Screen6Loop = ({ userInput }: Screen6LoopProps) => {
         </motion.div>
       </div>
 
-      {/* Explanation */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        className="mt-8 p-6 rounded-2xl bg-accent/10 border border-accent/30 max-w-lg"
-      >
-        <p className="text-foreground">
-          💡 <strong>È come scrivere una storia!</strong>
-          <br />
-          <span className="text-muted-foreground">
-            ChatGPT sceglie una parola, la aggiunge alla risposta, 
-            poi ripete il processo. Centinaia di volte al secondo!
-          </span>
+      {/* Explanation Box */}
+      <ExplanationBox title="Il loop autoRegressivo" delay={0.8}>
+        <p className="text-muted-foreground">
+          <strong className="text-foreground">ChatGPT genera una parola alla volta.</strong> 
+          Dopo aver scelto una parola, la aggiunge alla frase e ricomincia da capo!
         </p>
-      </motion.div>
+        <p className="text-muted-foreground">
+          Questo processo si chiama <strong className="text-foreground">"generazione autoregressiva"</strong>: 
+          ogni nuova parola dipende da tutte quelle precedenti. 
+          È come scrivere una storia un passo alla volta.
+        </p>
+        <p className="text-muted-foreground">
+          Il ciclo continua finché ChatGPT non produce un segnale di "fine risposta" 
+          o raggiunge un limite di parole.
+        </p>
+        <div className="mt-3 p-3 bg-muted/50 rounded-lg">
+          <p className="text-sm text-muted-foreground">
+            <strong className="text-foreground">Curiosità:</strong> ChatGPT può generare circa 100 parole al secondo! 
+            Ogni singola parola richiede miliardi di calcoli.
+          </p>
+        </div>
+      </ExplanationBox>
     </div>
   );
 };

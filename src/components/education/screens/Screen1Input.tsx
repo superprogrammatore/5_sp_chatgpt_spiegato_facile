@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { MessageSquare, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { ExplanationBox } from "../ExplanationBox";
 
 interface Screen1InputProps {
   userInput: string;
@@ -97,6 +98,22 @@ export const Screen1Input = ({ userInput, setUserInput, onSubmit }: Screen1Input
       >
         💡 Le tue parole entreranno in una "scatola magica"...
       </motion.p>
+
+      {/* Explanation Box */}
+      <ExplanationBox title="Come funziona ChatGPT?" delay={1}>
+        <p className="text-muted-foreground">
+          <strong className="text-foreground">ChatGPT è come un super-lettore.</strong> Ha letto miliardi di pagine 
+          di testo e ha imparato i "pattern" del linguaggio umano.
+        </p>
+        <p className="text-muted-foreground">
+          Quando scrivi qualcosa, ChatGPT non "capisce" come farebbe una persona. 
+          Invece, cerca di <strong className="text-foreground">prevedere quale parola viene dopo</strong>, 
+          basandosi su tutto quello che ha letto.
+        </p>
+        <p className="text-sm text-muted-foreground italic">
+          🎯 Nelle prossime schermate, vedrai esattamente i passi che fa!
+        </p>
+      </ExplanationBox>
     </div>
   );
 };

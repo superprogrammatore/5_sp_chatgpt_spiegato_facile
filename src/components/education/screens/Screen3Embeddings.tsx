@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
+import { ExplanationBox } from "../ExplanationBox";
 
 interface Screen3EmbeddingsProps {
   userInput: string;
@@ -222,23 +223,28 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
         )}
       </div>
 
-      {/* Explanation */}
+      {/* Explanation Box */}
       {step >= 3 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-10 p-6 rounded-2xl bg-accent/10 border border-accent/30 max-w-lg"
-        >
-          <p className="text-foreground">
-            💡 <strong>Cosa significa per ChatGPT?</strong>
-            <br />
-            <span className="text-muted-foreground">
-              Quando "felice" e "contento" sono vicini nello spazio, 
-              ChatGPT sa che possono essere usati in contesti simili!
-            </span>
+        <ExplanationBox title="Cosa sono gli embeddings?" delay={0.5}>
+          <p className="text-muted-foreground">
+            <strong className="text-foreground">Gli embeddings sono come una mappa del significato.</strong> 
+            Ogni parola diventa un punto in uno "spazio" immaginario.
           </p>
-        </motion.div>
+          <p className="text-muted-foreground">
+            Le parole con significato simile (come "cane" e "gatto") 
+            sono <strong className="text-foreground">vicine</strong> in questo spazio. 
+            Parole diverse (come "cane" e "automobile") sono lontane.
+          </p>
+          <p className="text-muted-foreground">
+            È così che ChatGPT "capisce" che alcune parole sono intercambiabili in certi contesti!
+          </p>
+          <div className="mt-3 p-3 bg-muted/50 rounded-lg">
+            <p className="text-sm text-muted-foreground">
+              <strong className="text-foreground">Curiosità:</strong> Ogni parola è rappresentata da centinaia di numeri. 
+              ChatGPT usa 12.288 numeri per ogni singolo token!
+            </p>
+          </div>
+        </ExplanationBox>
       )}
     </div>
   );
