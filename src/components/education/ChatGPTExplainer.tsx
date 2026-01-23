@@ -9,8 +9,9 @@ import { Screen4Attention } from "./screens/Screen4Attention";
 import { Screen5Prediction } from "./screens/Screen5Prediction";
 import { Screen6Loop } from "./screens/Screen6Loop";
 import { Screen7Training } from "./screens/Screen7Training";
+import { Screen8Summary } from "./screens/Screen8Summary";
 
-const TOTAL_SCREENS = 7;
+const TOTAL_SCREENS = 8;
 
 export const ChatGPTExplainer = () => {
   const [currentScreen, setCurrentScreen] = useState(0);
@@ -66,6 +67,8 @@ export const ChatGPTExplainer = () => {
         return <Screen6Loop userInput={submittedInput} />;
       case 6:
         return <Screen7Training />;
+      case 7:
+        return <Screen8Summary userInput={submittedInput} />;
       default:
         return null;
     }
