@@ -49,24 +49,24 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
   };
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center w-full">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-6 md:mb-8"
       >
         <motion.div
-          className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-secondary/20 mb-6"
+          className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-secondary/20 mb-3 md:mb-6"
           animate={{ y: [0, -5, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Target className="w-10 h-10 text-secondary" />
+          <Target className="w-7 h-7 md:w-10 md:h-10 text-secondary" />
         </motion.div>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
           Scegliere la prossima parola
         </h1>
-        <p className="text-lg text-muted-foreground max-w-lg">
+        <p className="text-sm md:text-lg text-muted-foreground max-w-lg px-2">
           ChatGPT non "risponde". Sceglie la parola più probabile!
         </p>
       </motion.div>
@@ -75,11 +75,11 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="mb-6 flex gap-3"
+        className="mb-4 md:mb-6 flex gap-2 md:gap-3"
       >
         <button
           onClick={() => { setPlayMode(false); resetGame(); }}
-          className={`px-4 py-2 rounded-xl font-medium transition-all ${
+          className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl font-medium transition-all text-sm md:text-base ${
             !playMode 
               ? "bg-primary text-primary-foreground" 
               : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -89,7 +89,7 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
         </button>
         <button
           onClick={() => { setPlayMode(true); resetGame(); }}
-          className={`px-4 py-2 rounded-xl font-medium transition-all ${
+          className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl font-medium transition-all text-sm md:text-base ${
             playMode 
               ? "bg-primary text-primary-foreground" 
               : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -107,9 +107,9 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
           className="edu-card"
         >
           {/* Context phrase */}
-          <div className="mb-6 p-4 bg-muted/50 rounded-xl">
-            <p className="text-sm text-muted-foreground mb-2">Contesto:</p>
-            <p className="text-lg font-medium">
+          <div className="mb-4 md:mb-6 p-3 md:p-4 bg-muted/50 rounded-lg md:rounded-xl">
+            <p className="text-xs md:text-sm text-muted-foreground mb-1 md:mb-2">Contesto:</p>
+            <p className="text-sm md:text-lg font-medium">
               "Il sole splende alto nel..."
               {showResult && selectedWord && (
                 <motion.span
@@ -124,14 +124,14 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
           </div>
 
           {/* Prediction list */}
-          <div className="mb-6">
-            <p className="text-sm text-muted-foreground mb-4">
+          <div className="mb-4 md:mb-6">
+            <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
               {playMode 
                 ? "🎯 Scegli quale parola credi che ChatGPT selezionerebbe:" 
                 : "📊 Parole possibili con le loro probabilità:"}
             </p>
             
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-3">
               {examplePredictions.map((prediction, index) => {
                 const isSelected = selectedWord === prediction.word;
                 const isUserGuess = userGuess === prediction.word;
@@ -143,7 +143,7 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => handleWordClick(prediction.word)}
-                    className={`relative overflow-hidden rounded-xl transition-all duration-300 ${
+                    className={`relative overflow-hidden rounded-lg md:rounded-xl transition-all duration-300 ${
                       playMode && !showResult
                         ? "cursor-pointer hover:scale-[1.02] hover:shadow-md"
                         : ""
@@ -166,24 +166,24 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
                     />
                     
                     {/* Content */}
-                    <div className="relative flex items-center justify-between p-4">
-                      <div className="flex items-center gap-3">
+                    <div className="relative flex items-center justify-between p-3 md:p-4">
+                      <div className="flex items-center gap-2 md:gap-3">
                         {isSelected && showResult && (
                           <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
-                            className="w-6 h-6 rounded-full bg-primary flex items-center justify-center"
+                            className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary flex items-center justify-center"
                           >
-                            <Check className="w-4 h-4 text-primary-foreground" />
+                            <Check className="w-3 h-3 md:w-4 md:h-4 text-primary-foreground" />
                           </motion.div>
                         )}
-                        <span className={`font-medium text-lg ${
+                        <span className={`font-medium text-base md:text-lg ${
                           isSelected ? "text-primary" : ""
                         }`}>
                           {prediction.word}
                         </span>
                       </div>
-                      <span className="font-mono text-muted-foreground">
+                      <span className="font-mono text-muted-foreground text-sm md:text-base">
                         {prediction.probability}%
                       </span>
                     </div>
@@ -200,7 +200,7 @@ export const Screen5Prediction = ({ userInput }: Screen5PredictionProps) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className={`p-4 rounded-xl ${
+                className={`p-3 md:p-4 rounded-lg md:rounded-xl text-sm md:text-base ${
                   playMode && userGuess === selectedWord
                     ? "bg-accent/20 border border-accent"
                     : "bg-primary/10 border border-primary/30"

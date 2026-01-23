@@ -53,15 +53,15 @@ export const Screen4Attention = ({ userInput }: Screen4AttentionProps) => {
   const exampleTokens = currentExample.sentence.split(/\s+/);
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center w-full">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-6 md:mb-8"
       >
         <motion.div
-          className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-highlight/20 mb-6"
+          className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-highlight/20 mb-3 md:mb-6"
           animate={{ 
             boxShadow: [
               "0 0 0 0 hsl(var(--highlight) / 0.4)",
@@ -70,17 +70,17 @@ export const Screen4Attention = ({ userInput }: Screen4AttentionProps) => {
           }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <Eye className="w-10 h-10 text-highlight" />
+          <Eye className="w-7 h-7 md:w-10 md:h-10 text-highlight" />
         </motion.div>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
           L'attenzione
         </h1>
-        <p className="text-lg text-muted-foreground max-w-lg">
+        <p className="text-sm md:text-lg text-muted-foreground max-w-lg px-2">
           ChatGPT "guarda" le parole precedenti per capire il significato.
         </p>
       </motion.div>
 
-      <div className="w-full max-w-2xl space-y-6">
+      <div className="w-full max-w-2xl space-y-4 md:space-y-6">
         {/* Step 1: Simple metaphor */}
         {step >= 1 && (
           <motion.div
@@ -88,13 +88,13 @@ export const Screen4Attention = ({ userInput }: Screen4AttentionProps) => {
             animate={{ opacity: 1, y: 0 }}
             className="edu-card"
           >
-            <div className="flex items-start gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-highlight/20">
-                <Lightbulb className="w-5 h-5 text-highlight" />
+            <div className="flex items-start gap-2 md:gap-3 mb-3 md:mb-4">
+              <div className="p-1.5 md:p-2 rounded-lg bg-highlight/20 flex-shrink-0">
+                <Lightbulb className="w-4 h-4 md:w-5 md:h-5 text-highlight" />
               </div>
               <div className="text-left">
-                <p className="font-medium text-foreground mb-1">Immagina di leggere un libro...</p>
-                <p className="text-sm text-muted-foreground">
+                <p className="font-medium text-foreground mb-1 text-sm md:text-base">Immagina di leggere un libro...</p>
+                <p className="text-xs md:text-sm text-muted-foreground">
                   Quando leggi una parola, il tuo cervello automaticamente "guarda indietro" 
                   alle parole precedenti per capire il significato. ChatGPT fa la stessa cosa!
                 </p>
@@ -110,13 +110,13 @@ export const Screen4Attention = ({ userInput }: Screen4AttentionProps) => {
             animate={{ opacity: 1, y: 0 }}
             className="edu-card"
           >
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
               👆 <strong>Clicca su una parola</strong> per vedere quali altre parole ChatGPT guarda:
             </p>
 
             {/* User's sentence with clickable words */}
-            <div className="p-6 bg-muted/30 rounded-xl mb-4">
-              <div className="flex flex-wrap gap-3 justify-center">
+            <div className="p-4 md:p-6 bg-muted/30 rounded-lg md:rounded-xl mb-3 md:mb-4">
+              <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
                 {tokens.map((token, index) => {
                   const isSelected = selectedWordIndex === index;
                   const attentionLevel = selectedWordIndex !== null 
@@ -127,7 +127,7 @@ export const Screen4Attention = ({ userInput }: Screen4AttentionProps) => {
                     <motion.button
                       key={index}
                       onClick={() => setSelectedWordIndex(index)}
-                      className={`relative px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
+                      className={`relative px-2 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl font-medium transition-all duration-300 text-sm md:text-base ${
                         isSelected 
                           ? "bg-primary text-primary-foreground ring-4 ring-primary/30" 
                           : "bg-background border-2 border-border hover:border-primary"

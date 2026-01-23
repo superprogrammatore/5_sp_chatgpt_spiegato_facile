@@ -13,19 +13,19 @@ export const ExplanationBox = ({ title, children, delay = 0 }: ExplanationBoxPro
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
-      className="mt-8 w-full max-w-2xl"
+      className="mt-6 md:mt-8 w-full max-w-2xl px-1"
     >
-      <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-muted/50 to-background">
+      <div className="relative overflow-hidden rounded-xl md:rounded-2xl border border-border bg-gradient-to-br from-muted/50 to-background">
         {/* Header */}
-        <div className="flex items-center gap-3 p-4 border-b border-border bg-muted/30">
-          <div className="p-2 rounded-lg bg-primary/10">
-            <BookOpen className="w-5 h-5 text-primary" />
+        <div className="flex items-center gap-2 md:gap-3 p-3 md:p-4 border-b border-border bg-muted/30">
+          <div className="p-1.5 md:p-2 rounded-lg bg-primary/10">
+            <BookOpen className="w-4 h-4 md:w-5 md:h-5 text-primary" />
           </div>
-          <h3 className="font-semibold text-foreground">{title}</h3>
+          <h3 className="font-semibold text-foreground text-sm md:text-base">{title}</h3>
         </div>
         
         {/* Content */}
-        <div className="p-5 space-y-3 text-left">
+        <div className="p-4 md:p-5 space-y-2 md:space-y-3 text-left text-sm md:text-base">
           {children}
         </div>
       </div>

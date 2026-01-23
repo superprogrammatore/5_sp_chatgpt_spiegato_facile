@@ -19,25 +19,25 @@ export const Screen1Input = ({ userInput, setUserInput, onSubmit }: Screen1Input
   };
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center w-full">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="mb-8"
+        className="mb-6 md:mb-8"
       >
         <motion.div
-          className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-primary/10 mb-6"
+          className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-primary/10 mb-4 md:mb-6"
           animate={{ y: [0, -5, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <MessageSquare className="w-10 h-10 text-primary" />
+          <MessageSquare className="w-7 h-7 md:w-10 md:h-10 text-primary" />
         </motion.div>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
           Scrivi una frase
         </h1>
-        <p className="text-lg text-muted-foreground max-w-md">
+        <p className="text-sm md:text-lg text-muted-foreground max-w-md px-2">
           Scrivi qualcosa come faresti normalmente con ChatGPT. 
           Ti mostreremo cosa succede dietro le quinte!
         </p>
@@ -64,7 +64,7 @@ export const Screen1Input = ({ userInput, setUserInput, onSubmit }: Screen1Input
               onBlur={() => setIsFocused(false)}
               onKeyDown={handleKeyDown}
               placeholder="Es: Come funziona il cervello umano?"
-              className="edu-input min-h-[120px] resize-none text-xl"
+              className="edu-input min-h-[100px] md:min-h-[120px] resize-none text-base md:text-xl"
               rows={3}
             />
           </div>
@@ -74,15 +74,15 @@ export const Screen1Input = ({ userInput, setUserInput, onSubmit }: Screen1Input
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-6"
+            className="mt-4 md:mt-6"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onSubmit}
-              className="edu-button-primary text-lg px-8 py-4"
+              className="edu-button-primary text-base md:text-lg px-6 md:px-8 py-3 md:py-4"
             >
-              <Sparkles className="w-5 h-5" />
+              <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
               Scopri cosa succede
             </motion.button>
           </motion.div>

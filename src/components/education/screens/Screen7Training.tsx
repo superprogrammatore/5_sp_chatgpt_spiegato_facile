@@ -40,15 +40,15 @@ export const Screen7Training = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center w-full">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-6 md:mb-8"
       >
         <motion.div
-          className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-tertiary/20 mb-6"
+          className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-tertiary/20 mb-3 md:mb-6"
           animate={{ 
             boxShadow: [
               "0 0 0 0 rgba(167, 139, 250, 0.4)",
@@ -57,35 +57,35 @@ export const Screen7Training = () => {
           }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <Brain className="w-10 h-10 text-tertiary" />
+          <Brain className="w-7 h-7 md:w-10 md:h-10 text-tertiary" />
         </motion.div>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
           Perché sembra intelligente?
         </h1>
-        <p className="text-lg text-muted-foreground max-w-lg">
+        <p className="text-sm md:text-lg text-muted-foreground max-w-lg px-2">
           ChatGPT è stato allenato leggendo enormi quantità di testo.
         </p>
       </motion.div>
 
       {/* Main content */}
-      <div className="w-full max-w-2xl space-y-6">
+      <div className="w-full max-w-2xl space-y-4 md:space-y-6">
         {/* Training visualization */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="edu-card"
         >
-          <p className="text-sm text-muted-foreground mb-4">
+          <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
             📈 Processo di allenamento:
           </p>
 
           {/* Library animation */}
-          <div className="relative h-40 bg-gradient-to-r from-primary/5 via-secondary/5 to-tertiary/5 rounded-xl overflow-hidden mb-4">
+          <div className="relative h-28 md:h-40 bg-gradient-to-r from-primary/5 via-secondary/5 to-tertiary/5 rounded-lg md:rounded-xl overflow-hidden mb-3 md:mb-4">
             {/* Floating books - distributed evenly */}
             {Array.from({ length: 6 }).map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute text-2xl"
+                className="absolute text-xl md:text-2xl"
                 style={{ left: `${10 + i * 15}%` }}
                 initial={{ 
                   y: "120%",
@@ -112,8 +112,8 @@ export const Screen7Training = () => {
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <div className="w-20 h-20 rounded-full bg-tertiary/20 flex items-center justify-center">
-                <Brain className="w-10 h-10 text-tertiary" />
+              <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-tertiary/20 flex items-center justify-center">
+                <Brain className="w-7 h-7 md:w-10 md:h-10 text-tertiary" />
               </div>
             </motion.div>
           </div>
@@ -148,11 +148,11 @@ export const Screen7Training = () => {
                 transition={{ delay: index * 0.15 }}
                 className="edu-card text-center"
               >
-                <stat.icon className={`w-8 h-8 mx-auto mb-2 ${stat.color}`} />
-                <p className="text-2xl font-bold text-foreground mb-1">
+                <stat.icon className={`w-6 h-6 md:w-8 md:h-8 mx-auto mb-1 md:mb-2 ${stat.color}`} />
+                <p className="text-lg md:text-2xl font-bold text-foreground mb-0.5 md:mb-1">
                   {stat.value}
                 </p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
+                <p className="text-xs md:text-sm text-muted-foreground">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -165,17 +165,17 @@ export const Screen7Training = () => {
           transition={{ delay: 0.5 }}
           className="edu-card"
         >
-          <p className="text-sm text-muted-foreground mb-4">
+          <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
             📚 Da dove ha imparato:
           </p>
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="flex flex-wrap gap-1.5 md:gap-2 justify-center">
             {sources.map((source, index) => (
               <motion.span
                 key={source}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
-                className="px-4 py-2 bg-muted rounded-xl text-sm"
+                className="px-2 md:px-4 py-1.5 md:py-2 bg-muted rounded-lg md:rounded-xl text-xs md:text-sm"
               >
                 {source}
               </motion.span>
@@ -212,10 +212,10 @@ export const Screen7Training = () => {
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.5, type: "spring" }}
-        className="mt-8 text-center"
+        className="mt-6 md:mt-8 text-center"
       >
-        <span className="text-4xl">🎉</span>
-        <p className="mt-2 text-xl font-display font-bold text-foreground">
+        <span className="text-3xl md:text-4xl">🎉</span>
+        <p className="mt-2 text-lg md:text-xl font-display font-bold text-foreground">
           Complimenti! Ora sai come funziona ChatGPT!
         </p>
       </motion.div>
