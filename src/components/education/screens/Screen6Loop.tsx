@@ -186,9 +186,9 @@ export const Screen6Loop = ({ userInput }: Screen6LoopProps) => {
       </div>
 
       {/* Explanation Box */}
-      <ExplanationBox title="Il loop autoRegressivo" delay={0.8}>
+      <ExplanationBox title="Il loop autoregressivo" delay={0.8}>
         <p className="text-muted-foreground">
-          <strong className="text-foreground">ChatGPT genera una parola alla volta.</strong> 
+          <strong className="text-foreground">ChatGPT genera una parola alla volta.</strong>{" "}
           Dopo aver scelto una parola, la aggiunge alla frase e ricomincia da capo!
         </p>
         <p className="text-muted-foreground">
