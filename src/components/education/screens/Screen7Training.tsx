@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { BookOpen, Brain, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
+import { ExplanationBox } from "../ExplanationBox";
 
 export const Screen7Training = () => {
   const [trainingProgress, setTrainingProgress] = useState(0);
@@ -183,23 +184,28 @@ export const Screen7Training = () => {
         </motion.div>
       </div>
 
-      {/* Final explanation */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="mt-8 p-6 rounded-2xl bg-tertiary/10 border border-tertiary/30 max-w-lg"
-      >
-        <p className="text-foreground">
-          💡 <strong>Il segreto di ChatGPT</strong>
-          <br />
-          <span className="text-muted-foreground">
-            ChatGPT non capisce davvero come una persona. 
-            Ha semplicemente imparato i "pattern" del linguaggio leggendo enormi quantità di testo.
-            È bravissimo a prevedere cosa viene dopo!
-          </span>
+      {/* Explanation Box */}
+      <ExplanationBox title="Come è stato allenato?" delay={1}>
+        <p className="text-muted-foreground">
+          <strong className="text-foreground">L'allenamento di ChatGPT è avvenuto in due fasi.</strong>
         </p>
-      </motion.div>
+        <p className="text-muted-foreground">
+          <strong className="text-foreground">1. Pre-training:</strong> ChatGPT ha letto miliardi di pagine web, 
+          libri e articoli. Ha imparato i "pattern" del linguaggio: come le parole si combinano, 
+          la grammatica, i fatti del mondo.
+        </p>
+        <p className="text-muted-foreground">
+          <strong className="text-foreground">2. Fine-tuning:</strong> Poi è stato "affinato" con l'aiuto di persone 
+          che gli hanno insegnato a rispondere in modo utile, sicuro e conversazionale.
+        </p>
+        <div className="mt-3 p-3 bg-muted/50 rounded-lg">
+          <p className="text-sm text-muted-foreground">
+            <strong className="text-foreground">Importante:</strong> ChatGPT non "capisce" davvero. 
+            È bravissimo a riconoscere pattern e prevedere cosa viene dopo, 
+            ma non ha coscienza o comprensione come un umano!
+          </p>
+        </div>
+      </ExplanationBox>
 
       {/* Celebration */}
       <motion.div
