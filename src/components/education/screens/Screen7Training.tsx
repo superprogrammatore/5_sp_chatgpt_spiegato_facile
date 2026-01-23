@@ -81,25 +81,25 @@ export const Screen7Training = () => {
 
           {/* Library animation */}
           <div className="relative h-40 bg-gradient-to-r from-primary/5 via-secondary/5 to-tertiary/5 rounded-xl overflow-hidden mb-4">
-            {/* Floating books */}
-            {Array.from({ length: 12 }).map((_, i) => (
+            {/* Floating books - distributed evenly */}
+            {Array.from({ length: 6 }).map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute text-3xl"
+                className="absolute text-2xl"
+                style={{ left: `${10 + i * 15}%` }}
                 initial={{ 
-                  x: Math.random() * 100 + "%",
-                  y: "110%",
+                  y: "120%",
                   opacity: 0 
                 }}
                 animate={{ 
-                  y: "-10%",
+                  y: "-20%",
                   opacity: [0, 1, 1, 0],
                 }}
                 transition={{
-                  duration: 3,
-                  delay: i * 0.3,
+                  duration: 4,
+                  delay: i * 0.5,
                   repeat: Infinity,
-                  repeatDelay: 2,
+                  repeatDelay: 1,
                 }}
               >
                 📖
