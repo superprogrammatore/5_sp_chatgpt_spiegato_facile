@@ -170,11 +170,11 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
                       />
                       {/* Main dot */}
                       <motion.div 
-                        className={`relative w-10 h-10 md:w-12 md:h-12 rounded-full ${colorClass} shadow-lg flex items-center justify-center`}
+                        className={`relative min-w-14 h-10 md:min-w-16 md:h-12 px-3 rounded-full ${colorClass} shadow-lg flex items-center justify-center`}
                         whileHover={{ scale: 1.2 }}
                       >
-                        <span className="text-xs md:text-sm font-bold text-primary-foreground truncate px-1">
-                          {token.slice(0, 3)}
+                        <span className="text-xs md:text-sm font-bold text-primary-foreground">
+                          {token}
                         </span>
                       </motion.div>
                       {/* Label on hover */}
