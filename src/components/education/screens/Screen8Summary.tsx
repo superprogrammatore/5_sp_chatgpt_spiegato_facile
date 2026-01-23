@@ -87,27 +87,27 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
   };
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center w-full">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-4 md:mb-8"
       >
         <motion.div
-          className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-primary/20 mb-6"
+          className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-primary/20 mb-3 md:mb-6"
           animate={{ 
             rotate: [0, 360],
             scale: [1, 1.1, 1]
           }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Workflow className="w-10 h-10 text-primary" />
+          <Workflow className="w-7 h-7 md:w-10 md:h-10 text-primary" />
         </motion.div>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
           Il processo completo
         </h1>
-        <p className="text-lg text-muted-foreground max-w-lg">
+        <p className="text-sm md:text-lg text-muted-foreground max-w-lg px-2">
           Ecco come tutti i passaggi si collegano insieme!
         </p>
       </motion.div>
@@ -120,17 +120,17 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
           className="edu-card"
         >
           {/* User input reminder */}
-          <div className="mb-6 p-4 bg-muted/50 rounded-xl border border-border">
-            <p className="text-sm text-muted-foreground mb-1">La tua frase:</p>
-            <p className="text-lg font-medium text-foreground">"{userInput}"</p>
+          <div className="mb-4 md:mb-6 p-3 md:p-4 bg-muted/50 rounded-lg md:rounded-xl border border-border">
+            <p className="text-xs md:text-sm text-muted-foreground mb-1">La tua frase:</p>
+            <p className="text-sm md:text-lg font-medium text-foreground break-words">"{userInput}"</p>
           </div>
 
           {/* Steps flow */}
           <div className="relative">
             {/* Connection line */}
-            <div className="absolute left-8 top-8 bottom-8 w-0.5 bg-border hidden md:block" />
+            <div className="absolute left-6 md:left-8 top-8 bottom-8 w-0.5 bg-border hidden md:block" />
             
-            <div className="space-y-4">
+            <div className="space-y-2 md:space-y-4">
               {steps.map((step, index) => {
                 const isActive = index <= activeStep;
                 const isCurrent = index === activeStep;
@@ -146,7 +146,7 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
                       scale: isCurrent ? 1.02 : 1
                     }}
                     transition={{ delay: index * 0.1, duration: 0.3 }}
-                    className={`relative flex items-center gap-4 p-4 rounded-xl transition-all duration-300 ${
+                    className={`relative flex items-center gap-2 md:gap-4 p-2 md:p-4 rounded-lg md:rounded-xl transition-all duration-300 ${
                       isActive 
                         ? "bg-muted/50 border border-border" 
                         : "bg-transparent"
@@ -154,21 +154,21 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
                   >
                     {/* Icon */}
                     <motion.div
-                      className={`relative z-10 w-12 h-12 rounded-xl flex items-center justify-center ${
+                      className={`relative z-10 w-9 h-9 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 ${
                         isActive ? step.color : "bg-muted"
                       }`}
                       animate={isCurrent ? { scale: [1, 1.1, 1] } : {}}
                       transition={{ duration: 0.5, repeat: isCurrent ? Infinity : 0 }}
                     >
-                      <Icon className={`w-6 h-6 ${isActive ? "text-primary-foreground" : "text-muted-foreground"}`} />
+                      <Icon className={`w-4 h-4 md:w-6 md:h-6 ${isActive ? "text-primary-foreground" : "text-muted-foreground"}`} />
                     </motion.div>
 
                     {/* Content */}
-                    <div className="flex-1 text-left">
-                      <p className={`font-semibold ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
+                    <div className="flex-1 text-left min-w-0">
+                      <p className={`font-semibold text-sm md:text-base ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
                         {step.title}
                       </p>
-                      <p className={`text-sm ${isActive ? "text-muted-foreground" : "text-muted-foreground/60"}`}>
+                      <p className={`text-xs md:text-sm ${isActive ? "text-muted-foreground" : "text-muted-foreground/60"}`}>
                         {step.description}
                       </p>
                     </div>
@@ -178,9 +178,9 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        className="w-6 h-6 rounded-full bg-primary flex items-center justify-center"
+                        className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0"
                       >
-                        <CheckCircle2 className="w-4 h-4 text-primary-foreground" />
+                        <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4 text-primary-foreground" />
                       </motion.div>
                     )}
 
@@ -189,8 +189,9 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
                       <motion.div
                         animate={{ x: [0, 5, 0] }}
                         transition={{ duration: 1, repeat: Infinity }}
+                        className="flex-shrink-0"
                       >
-                        <ArrowRight className="w-5 h-5 text-primary" />
+                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                       </motion.div>
                     )}
                   </motion.div>
@@ -204,28 +205,28 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-8 p-6 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30"
+              className="mt-4 md:mt-8 p-4 md:p-6 rounded-lg md:rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30"
             >
-              <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
                 <motion.span
                   animate={{ rotate: [0, 360] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                  className="text-2xl"
+                  className="text-xl md:text-2xl"
                 >
                   ⚙️
                 </motion.span>
-                <p className="text-lg font-semibold text-foreground">
+                <p className="text-base md:text-lg font-semibold text-foreground">
                   Processo completato!
                 </p>
                 <motion.span
                   animate={{ rotate: [0, -360] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                  className="text-2xl"
+                  className="text-xl md:text-2xl"
                 >
                   ⚙️
                 </motion.span>
               </div>
-              <p className="text-muted-foreground">
+              <p className="text-sm md:text-base text-muted-foreground">
                 Questi 7 passaggi avvengono <strong className="text-foreground">centinaia di volte al secondo</strong>, 
                 per ogni singola parola della risposta. È così che ChatGPT "costruisce" le sue risposte!
               </p>
@@ -253,71 +254,71 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mt-8 w-full max-w-2xl"
+          className="mt-6 md:mt-8 w-full max-w-2xl px-1"
         >
           <div className="edu-card">
-            <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-              <span className="text-2xl">🎓</span> Riassunto finale
+            <h3 className="text-lg md:text-xl font-semibold text-foreground mb-3 md:mb-4 flex items-center gap-2">
+              <span className="text-xl md:text-2xl">🎓</span> Riassunto finale
             </h3>
             
-            <div className="space-y-3 text-left">
-              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-primary">
-                <p className="font-semibold text-foreground mb-1">
+            <div className="space-y-2 md:space-y-3 text-left">
+              <div className="p-3 md:p-4 bg-muted/50 rounded-lg md:rounded-xl border-l-4 border-primary">
+                <p className="font-semibold text-foreground mb-1 text-sm md:text-base">
                   1. Input e Tokenizzazione
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Tu scrivi una frase. Il modello la spezza in pezzi chiamati <strong className="text-primary">token</strong> — possono essere parole intere o parti di parole. Ogni token viene poi convertito in un numero unico che il computer può elaborare.
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  Tu scrivi una frase. Il modello la spezza in pezzi chiamati <strong className="text-primary">token</strong> — possono essere parole intere o parti di parole. Ogni token viene convertito in un numero.
                 </p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-accent">
-                <p className="font-semibold text-foreground mb-1">
+              <div className="p-3 md:p-4 bg-muted/50 rounded-lg md:rounded-xl border-l-4 border-accent">
+                <p className="font-semibold text-foreground mb-1 text-sm md:text-base">
                   2. Embeddings (Vettori di significato)
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Ogni numero diventa una lista di valori chiamata <strong className="text-accent">vettore</strong>. Questo vettore cattura il "significato" della parola: parole simili avranno vettori simili. È come dare a ogni parola delle coordinate in uno spazio matematico.
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  Ogni numero diventa una lista di valori chiamata <strong className="text-accent">vettore</strong>. Cattura il "significato" della parola: parole simili avranno vettori simili.
                 </p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-highlight">
-                <p className="font-semibold text-foreground mb-1">
+              <div className="p-3 md:p-4 bg-muted/50 rounded-lg md:rounded-xl border-l-4 border-highlight">
+                <p className="font-semibold text-foreground mb-1 text-sm md:text-base">
                   3. Meccanismo di Attenzione
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Il modello analizza tutte le parole insieme e decide quali sono più <strong className="text-highlight">importanti</strong> per capire il contesto. Ad esempio, in "Il gatto mangia il pesce", l'attenzione collega "mangia" a "gatto" (chi fa l'azione) e a "pesce" (cosa viene mangiato).
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  Il modello decide quali parole sono più <strong className="text-highlight">importanti</strong> per capire il contesto, collegando parole correlate tra loro.
                 </p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-tertiary">
-                <p className="font-semibold text-foreground mb-1">
+              <div className="p-3 md:p-4 bg-muted/50 rounded-lg md:rounded-xl border-l-4 border-tertiary">
+                <p className="font-semibold text-foreground mb-1 text-sm md:text-base">
                   4. Predizione della parola successiva
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Dopo aver "compreso" il contesto, ChatGPT calcola le probabilità di tutte le possibili parole successive e sceglie quella più <strong className="text-tertiary">probabile</strong>. È come completare una frase: "Il sole tramonta sul..." → probabilmente "mare" o "orizzonte".
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  ChatGPT calcola le probabilità e sceglie la parola più <strong className="text-tertiary">probabile</strong>. Come completare: "Il sole tramonta sul..." → "mare".
                 </p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-secondary">
-                <p className="font-semibold text-foreground mb-1">
+              <div className="p-3 md:p-4 bg-muted/50 rounded-lg md:rounded-xl border-l-4 border-secondary">
+                <p className="font-semibold text-foreground mb-1 text-sm md:text-base">
                   5. Loop autoregressivo
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  La parola scelta viene aggiunta alla frase, e tutto il processo <strong className="text-secondary">ricomincia</strong>. Il modello genera una parola alla volta, considerando ogni volta tutto ciò che ha già scritto. Così nasce la risposta completa!
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  La parola scelta viene aggiunta e il processo <strong className="text-secondary">ricomincia</strong>. Genera una parola alla volta costruendo la risposta completa!
                 </p>
               </div>
 
-              <div className="p-4 bg-muted/50 rounded-xl border-l-4 border-primary">
-                <p className="font-semibold text-foreground mb-1">
+              <div className="p-3 md:p-4 bg-muted/50 rounded-lg md:rounded-xl border-l-4 border-primary">
+                <p className="font-semibold text-foreground mb-1 text-sm md:text-base">
                   6. Il segreto: l'allenamento
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Tutto questo funziona perché ChatGPT è stato <strong className="text-primary">allenato</strong> leggendo miliardi di testi. Ha imparato i pattern del linguaggio, le regole grammaticali, i fatti sul mondo — tutto attraverso l'esposizione massiva a testi scritti da umani.
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  Tutto funziona perché ChatGPT è stato <strong className="text-primary">allenato</strong> leggendo miliardi di testi, imparando pattern del linguaggio e fatti sul mondo.
                 </p>
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-primary/10 rounded-xl border border-primary/30">
-              <p className="text-foreground text-center">
+            <div className="mt-4 md:mt-6 p-3 md:p-4 bg-primary/10 rounded-lg md:rounded-xl border border-primary/30">
+              <p className="text-foreground text-center text-sm md:text-base">
                 🧠 <strong>Tutto questo è reso possibile dall'allenamento</strong> su miliardi di testi!
               </p>
             </div>
@@ -331,13 +332,13 @@ export const Screen8Summary = ({ userInput }: Screen8SummaryProps) => {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.8, type: "spring" }}
-          className="mt-8 text-center"
+          className="mt-6 md:mt-8 text-center pb-4"
         >
-          <span className="text-5xl">🎉</span>
-          <p className="mt-3 text-2xl font-display font-bold text-foreground">
+          <span className="text-4xl md:text-5xl">🎉</span>
+          <p className="mt-2 md:mt-3 text-xl md:text-2xl font-display font-bold text-foreground">
             Ora sai come funziona ChatGPT!
           </p>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-1 md:mt-2 text-sm md:text-base text-muted-foreground">
             Hai completato il tutorial interattivo.
           </p>
         </motion.div>

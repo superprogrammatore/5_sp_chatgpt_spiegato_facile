@@ -48,24 +48,24 @@ export const Screen6Loop = ({ userInput }: Screen6LoopProps) => {
   const visibleWords = responseWords.slice(0, currentWordIndex);
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center w-full">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-6 md:mb-8"
       >
         <motion.div
-          className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-accent/20 mb-6"
+          className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-accent/20 mb-3 md:mb-6"
           animate={{ rotate: 360 }}
           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         >
-          <RefreshCw className="w-10 h-10 text-accent" />
+          <RefreshCw className="w-7 h-7 md:w-10 md:h-10 text-accent" />
         </motion.div>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
           Ripeti il processo
         </h1>
-        <p className="text-lg text-muted-foreground max-w-lg">
+        <p className="text-sm md:text-lg text-muted-foreground max-w-lg px-2">
           Ripetendo questo processo, parola dopo parola, nasce una risposta completa!
         </p>
       </motion.div>
@@ -76,10 +76,10 @@ export const Screen6Loop = ({ userInput }: Screen6LoopProps) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="edu-card mb-6"
+          className="edu-card mb-4 md:mb-6"
         >
-          <p className="text-sm text-muted-foreground mb-2">La tua domanda:</p>
-          <p className="text-lg font-medium text-foreground">"{userInput}"</p>
+          <p className="text-xs md:text-sm text-muted-foreground mb-1 md:mb-2">La tua domanda:</p>
+          <p className="text-sm md:text-lg font-medium text-foreground break-words">"{userInput}"</p>
         </motion.div>
 
         {/* Response being built */}
@@ -89,21 +89,21 @@ export const Screen6Loop = ({ userInput }: Screen6LoopProps) => {
           transition={{ delay: 0.2 }}
           className="edu-card"
         >
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-sm text-muted-foreground">Risposta in costruzione:</p>
+          <div className="flex items-center justify-between mb-3 md:mb-4">
+            <p className="text-xs md:text-sm text-muted-foreground">Risposta in costruzione:</p>
             <span className="text-xs font-mono text-primary">
               {currentWordIndex}/{responseWords.length} parole
             </span>
           </div>
 
           {/* Response text */}
-          <div className="min-h-[100px] p-4 bg-muted/30 rounded-xl text-left">
+          <div className="min-h-[80px] md:min-h-[100px] p-3 md:p-4 bg-muted/30 rounded-lg md:rounded-xl text-left">
             {visibleWords.map((word, index) => (
               <motion.span
                 key={index}
                 initial={{ opacity: 0, y: 10, scale: 1.2 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                className={`inline-block mr-1 text-lg ${
+                className={`inline-block mr-1 text-sm md:text-lg ${
                   index === visibleWords.length - 1 
                     ? "text-primary font-bold" 
                     : "text-foreground"
@@ -118,13 +118,13 @@ export const Screen6Loop = ({ userInput }: Screen6LoopProps) => {
               <motion.span
                 animate={{ opacity: [1, 0, 1] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block w-0.5 h-6 bg-primary ml-1 align-middle"
+                className="inline-block w-0.5 h-5 md:h-6 bg-primary ml-1 align-middle"
               />
             )}
           </div>
 
           {/* Progress bar */}
-          <div className="mt-4 h-2 bg-muted rounded-full overflow-hidden">
+          <div className="mt-3 md:mt-4 h-2 bg-muted rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-gradient-to-r from-primary to-accent"
               animate={{ width: `${(currentWordIndex / responseWords.length) * 100}%` }}
@@ -133,16 +133,16 @@ export const Screen6Loop = ({ userInput }: Screen6LoopProps) => {
           </div>
 
           {/* Step indicator */}
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <div className="flex items-center gap-2 p-3 bg-primary/10 rounded-xl">
+          <div className="mt-4 md:mt-6 flex items-center justify-center gap-2 md:gap-4 flex-wrap">
+            <div className="flex items-center gap-2 p-2 md:p-3 bg-primary/10 rounded-lg md:rounded-xl">
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 0.5, repeat: isPlaying ? Infinity : 0 }}
-                className="w-8 h-8 rounded-full bg-primary flex items-center justify-center"
+                className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary flex items-center justify-center"
               >
-                <Plus className="w-4 h-4 text-primary-foreground" />
+                <Plus className="w-3 h-3 md:w-4 md:h-4 text-primary-foreground" />
               </motion.div>
-              <span className="text-sm font-medium">
+              <span className="text-xs md:text-sm font-medium">
                 Parola {currentWordIndex + 1}
               </span>
             </div>
@@ -150,13 +150,13 @@ export const Screen6Loop = ({ userInput }: Screen6LoopProps) => {
             <motion.div
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1, repeat: Infinity }}
-              className="text-2xl"
+              className="text-xl md:text-2xl"
             >
               →
             </motion.div>
             
-            <div className="p-3 bg-muted/50 rounded-xl">
-              <span className="text-sm text-muted-foreground">
+            <div className="p-2 md:p-3 bg-muted/50 rounded-lg md:rounded-xl">
+              <span className="text-xs md:text-sm text-muted-foreground">
                 Ripeti...
               </span>
             </div>
@@ -168,17 +168,17 @@ export const Screen6Loop = ({ userInput }: Screen6LoopProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="mt-6 flex gap-3 justify-center"
+          className="mt-4 md:mt-6 flex gap-2 md:gap-3 justify-center"
         >
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="edu-button-outline"
+            className="edu-button-outline text-sm md:text-base px-3 md:px-6 py-2 md:py-3"
           >
             {isPlaying ? "⏸️ Pausa" : "▶️ Riprendi"}
           </button>
           <button
             onClick={() => setCurrentWordIndex(0)}
-            className="edu-button-outline"
+            className="edu-button-outline text-sm md:text-base px-3 md:px-6 py-2 md:py-3"
           >
             🔄 Ricomincia
           </button>

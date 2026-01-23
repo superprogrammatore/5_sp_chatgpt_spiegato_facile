@@ -54,24 +54,24 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center w-full">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-6 md:mb-8"
       >
         <motion.div
-          className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-accent/20 mb-6"
+          className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-accent/20 mb-3 md:mb-6"
           animate={{ scale: [1, 1.1, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Sparkles className="w-10 h-10 text-accent" />
+          <Sparkles className="w-7 h-7 md:w-10 md:h-10 text-accent" />
         </motion.div>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
           I numeri diventano significati
         </h1>
-        <p className="text-lg text-muted-foreground max-w-lg">
+        <p className="text-sm md:text-lg text-muted-foreground max-w-lg px-2">
           Numeri simili rappresentano significati simili!
         </p>
       </motion.div>
@@ -83,14 +83,14 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="edu-card mb-8"
+            className="edu-card mb-6 md:mb-8"
           >
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
               🎯 Le tue parole diventano punti colorati:
             </p>
             
             {/* Words to dots transformation */}
-            <div className="flex flex-wrap justify-center gap-3 mb-6">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-4 md:mb-6">
               {tokens.map((token, index) => {
                 const colorClass = tokenColors[index % tokenColors.length];
                 return (
@@ -99,10 +99,10 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.15 }}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-1 md:gap-2"
                   >
                     {/* The word */}
-                    <span className="text-foreground font-medium">{token}</span>
+                    <span className="text-foreground font-medium text-sm md:text-base">{token}</span>
                     
                     {/* Arrow */}
                     <motion.span
@@ -119,10 +119,10 @@ export const Screen3Embeddings = ({ userInput }: Screen3EmbeddingsProps) => {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: index * 0.15 + 0.5, type: "spring" }}
-                      className={`w-8 h-8 rounded-full ${colorClass} shadow-md flex items-center justify-center`}
+                      className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${colorClass} shadow-md flex items-center justify-center`}
                     >
                       <motion.div
-                        className={`absolute w-8 h-8 rounded-full ${colorClass} opacity-40`}
+                        className={`absolute w-6 h-6 md:w-8 md:h-8 rounded-full ${colorClass} opacity-40`}
                         animate={{ scale: [1, 1.4, 1] }}
                         transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
                       />

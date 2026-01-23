@@ -27,24 +27,24 @@ export const Screen2Tokenization = ({ userInput }: Screen2TokenizationProps) => 
   }, []);
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center w-full">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-6 md:mb-8"
       >
         <motion.div
-          className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-secondary/20 mb-6"
+          className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-secondary/20 mb-3 md:mb-6"
           animate={{ rotate: [0, -5, 5, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Scissors className="w-10 h-10 text-secondary" />
+          <Scissors className="w-7 h-7 md:w-10 md:h-10 text-secondary" />
         </motion.div>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <h1 className="font-display text-2xl md:text-5xl font-bold text-foreground mb-2 md:mb-4">
           Il testo diventa numeri
         </h1>
-        <p className="text-lg text-muted-foreground max-w-lg">
+        <p className="text-sm md:text-lg text-muted-foreground max-w-lg px-2">
           Il computer non capisce le parole come noi. Le trasforma in numeri!
         </p>
       </motion.div>
@@ -54,10 +54,10 @@ export const Screen2Tokenization = ({ userInput }: Screen2TokenizationProps) => 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="edu-card w-full max-w-2xl mb-8"
+        className="edu-card w-full max-w-2xl mb-6 md:mb-8"
       >
-        <p className="text-sm text-muted-foreground mb-3">La tua frase:</p>
-        <p className="text-xl font-medium text-foreground">"{userInput}"</p>
+        <p className="text-xs md:text-sm text-muted-foreground mb-2 md:mb-3">La tua frase:</p>
+        <p className="text-base md:text-xl font-medium text-foreground break-words">"{userInput}"</p>
       </motion.div>
 
       {/* Tokenization animation */}
@@ -67,19 +67,19 @@ export const Screen2Tokenization = ({ userInput }: Screen2TokenizationProps) => 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
+            className="mb-6 md:mb-8"
           >
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
               📦 Prima, la frase viene divisa in pezzi (chiamati "token"):
             </p>
-            <div className="flex flex-wrap gap-3 justify-center">
+            <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
               {tokens.map((token, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0, rotate: -10 }}
                   animate={{ opacity: 1, scale: 1, rotate: 0 }}
                   transition={{ delay: index * 0.15, duration: 0.4 }}
-                  className="token-box text-lg"
+                  className="token-box text-sm md:text-lg"
                 >
                   {token}
                 </motion.div>
@@ -94,29 +94,29 @@ export const Screen2Tokenization = ({ userInput }: Screen2TokenizationProps) => 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="flex items-center justify-center gap-3 mb-4 md:mb-6">
               <motion.div
                 animate={{ x: [0, 5, 0] }}
                 transition={{ duration: 1, repeat: Infinity }}
-                className="text-2xl"
+                className="text-xl md:text-2xl"
               >
                 ⬇️
               </motion.div>
             </div>
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
               🔢 Poi, ogni pezzo diventa un numero:
             </p>
-            <div className="flex flex-wrap gap-3 justify-center">
+            <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
               {tokens.map((token, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.15, duration: 0.4 }}
-                  className="flex flex-col items-center gap-2"
+                  className="flex flex-col items-center gap-1 md:gap-2"
                 >
-                  <span className="text-xs text-muted-foreground">{token}</span>
-                  <div className="number-box text-lg">
+                  <span className="text-[10px] md:text-xs text-muted-foreground truncate max-w-[60px] md:max-w-none">{token}</span>
+                  <div className="number-box text-sm md:text-lg">
                     {tokenIds[index]}
                   </div>
                 </motion.div>
