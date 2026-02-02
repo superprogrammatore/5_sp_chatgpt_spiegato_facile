@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Lock, Eye, EyeOff, Sparkles, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, Sparkles, AlertCircle } from "lucide-react";
 import { validateAccessCode, setAuthenticated } from "@/lib/auth";
+import superProgrammatoreLogo from "@/assets/super-programmatore-logo.png";
 
 interface LoginScreenProps {
   onLoginSuccess: () => void;
@@ -43,16 +44,21 @@ export const LoginScreen = ({ onLoginSuccess }: LoginScreenProps) => {
         transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
+        {/* Logo */}
+        <div className="text-center mb-4 md:mb-6">
+          <motion.img
+            src={superProgrammatoreLogo}
+            alt="Super Programmatore"
+            className="w-48 h-48 md:w-64 md:h-64 mx-auto object-contain"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          />
+        </div>
+
         {/* Header */}
-        <div className="text-center mb-6 md:mb-8">
-          <motion.div
-            className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-primary/10 mb-4 md:mb-6"
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Lock className="w-8 h-8 md:w-10 md:h-10 text-primary" />
-          </motion.div>
-          <h1 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-2 md:mb-3">
+        <div className="text-center mb-4 md:mb-6">
+          <h1 className="font-display text-xl md:text-3xl font-bold text-foreground mb-2">
             Accesso Riservato
           </h1>
           <p className="text-sm md:text-base text-muted-foreground">
